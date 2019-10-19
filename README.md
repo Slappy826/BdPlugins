@@ -10,4 +10,4 @@ Adds a toggle to the chat bar for toggling the instant deleting messages
 Adds extra options to voice channels and users for ease of moderation.
 (currently only adds options to voice channels)
 
-![Advanced Moderation Voice Chat Example](https://i.protosma.sh/uploads/n4mITezUlw.png)
+![Advanced Moderation Voice Chat Example](https://i.protosma.sh/uploads/c13olhTPAo.png)
