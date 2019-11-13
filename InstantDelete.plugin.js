@@ -4,7 +4,7 @@ class InstantDelete {
 
 	getName() { return "Instant Delete"; }
 	getDescription() { return "Instantly delete messages after sending them." }
-	getVersion() { return "0.0.1"; }
+	getVersion() { return "0.0.2"; }
 	getAuthor() { return "Slappy826#0001"; }
 
 	load() {
@@ -14,23 +14,27 @@ class InstantDelete {
 	}
 
 	start() {
-		ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), 'https://raw.githubusercontent.com/Slappy826/BdPlugins/master/InstantDelete.plugin.js');
+		ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), 'https://bd.protosmasher.net/plugins/InstantDelete.plugin.js');
 
 		this.unpatchRender = BdApi.monkeyPatch(BdApi.findModuleByDisplayName("ChannelTextArea").prototype, "render", {
 			after: e => {
 				var createElement = BdApi.React.createElement;
 				var children = e.returnValue.props.children.props.children[3].props.children;
-				children.unshift(createElement(BdApi.findModuleByDisplayName("TooltipDeprecated"), {
+				children.unshift(createElement(BdApi.findModuleByDisplayName("Tooltip"), {
 					text: "Instant Delete Toggle"
-				}, createElement(BdApi.findModuleByDisplayName("ChannelTextAreaButton"), {
-					className: BdApi.findModuleByProps("button", "autocomplete", "channelTextArea").button,
-					iconName: "EyeHidden",
-					onClick: () => {
-						this.active = !this.active;
-					},
-					isActive: this.active,
-					label: "Instant Delete"
-				})));
+				}, e => {
+					return createElement(BdApi.findModuleByDisplayName("ChannelTextAreaButton"), {
+						className: BdApi.findModuleByProps("button", "autocomplete", "channelTextArea").button,
+						iconName: "EyeHidden",
+						onClick: () => {
+							this.active = !this.active;
+						},
+						isActive: this.active,
+						label: "Instant Delete",
+						onMouseEnter: e.onMouseEnter,
+						onMouseLeave: e.onMouseLeave,
+					})
+				}));
 				return e.returnValue;
 			}
 		});
