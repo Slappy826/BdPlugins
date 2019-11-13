@@ -14,7 +14,7 @@ class InstantDelete {
 	}
 
 	start() {
-		ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), 'https://bd.protosmasher.net/plugins/InstantDelete.plugin.js');
+		ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), 'https://raw.githubusercontent.com/Slappy826/BdPlugins/master/InstantDelete.plugin.js');
 
 		this.unpatchRender = BdApi.monkeyPatch(BdApi.findModuleByDisplayName("ChannelTextArea").prototype, "render", {
 			after: e => {
