@@ -12,7 +12,7 @@ class BetterEmojis {
 	start() {
 		this.unpatch = BdApi.monkeyPatch(BdApi.findModuleByProps("getURL"), "getURL", {
 			instead: e => {
-				if(e.methodArguments[0] == "⛓") {
+				if(e.methodArguments[0] == "⛓" || e.methodArguments[0] == "⛓️") {
 					return "https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/26d3.png";
 				}
 				else if(e.methodArguments[0] == "🇲🇵") {
@@ -20,6 +20,9 @@ class BetterEmojis {
 				}
 				else if(e.methodArguments[0] == "🔫") {
 					return "https://raw.githubusercontent.com/twitter/twemoji/42d27cd00ad8caa99577f7c9ff752a471e6ed9a5/72x72/1f52b.png";
+				}
+				else if(e.methodArguments[0] == "🇺🇳") {
+					return "https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f1fa-1f1f3.png";
 				}
 				return e.callOriginalMethod();
 			}
